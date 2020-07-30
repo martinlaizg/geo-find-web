@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Roboto', sans-serif; */
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 0px;
+}
+
+/* Header */
+
+.header {
+	background-color: teal;
+	color: whitesmoke;
+	padding: 0.7em 2em;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header button {
+	margin: 0em 1em;
+	background-color: rgba(0, 0, 0, 0);
+	border: 2px rgba(0, 0, 0, 0) solid;
+	color: whitesmoke;
+	font-size: 12pt;
+}
+
+.header button:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 2px rgba(255, 255, 255, 0.2) solid;
+	border-radius: 0.2em;
+}
+
+.header .logo {
+	flex: 1;
+	font-size: 20pt;
+}
+
+/* Content */
+
+.main-content {
+	background-color: whitesmoke;
+	color: teal;
+	display: flex;
+	padding: 2em 1em 1em 1em;
+}
+
+.side {
+	flex: 1;
+}
+
+.content {
+	flex: 2;
+	border-left: 2px rgba(220, 220, 220, 0.5) solid;
+}
+
+h2 {
+	padding-left: 1em;
+}
+
+/* Form */
+
+form {
+	display: flex;
+	flex-direction: column;
+	padding: 1em 1em 1em 0em;
+}
+
+input {
+	padding: 0.5em;
+	border: 2px rgba(200, 200, 200, 1) solid;
+	border-radius: 0.4em;
+}
+
+input[type='text']:focus {
+	border: 2px rgba(255, 0, 0, 1) solid;
+}
+
+form label {
+	margin: 1em 0em 0.2em 0.5em;
+}
+
+form button {
+	margin: 1em 1em;
+	padding: 0.5em;
+	font-size: 12pt;
+}
+
+.card {
+	margin: 1em 2em;
+	padding: 1em 2em;
+	border: 2px teal solid;
+	border-radius: 0.5em;
+}
+
+.card h3 {
+	margin: 0.4em 0em 0.2em 0.5em;
+}
