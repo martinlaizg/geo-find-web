@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route
+	BrowserRouter as Router,
+	Switch,
+	Route
 } from 'react-router-dom'
 
 import './App.css'
@@ -15,30 +15,30 @@ import Navbar from './navbar/Navbar'
 import Search from './views/Search'
 
 function App() {
-  return (
-    <Router>
-      <div className="container">
-        <Navbar />
-        <Switch>
-          <Route path="/tours">
-            <Tours />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/search">
-            <Search />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  )
+	return (
+		<Router>
+			<div className="container">
+				<Navbar />
+				<Switch>
+					<Route path="/tours">
+						<Tours />
+					</Route>
+					<Route path="/users">
+						<Users />
+					</Route>
+					<Route path="/profile">
+						<Profile />
+					</Route>
+					<Route path="/search">
+						<Search />
+					</Route>
+					<Route path="/">
+						<Home />
+					</Route>
+				</Switch>
+			</div>
+		</Router>
+	)
 }
 
 export default App

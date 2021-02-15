@@ -1,0 +1,45 @@
+textarea, input {
+	border: 1px #999999 solid;
+	border-radius: 0.5em;
+	padding: 0.5em;
+}
+
+textarea:focus, input:focus {
+	outline: #00808080 auto 1px;
+}
+
+.form-input {
+	margin: 1em 1em;
+	display: flex;
+	align-items: center;
+}
+
+.form-input>label {
+	padding-right: 1em;
+}
+
+.form-input>input {
+	flex: 1;
+}
+
+.form-input.textarea {
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.textarea>textarea {
+	resize: vertical;
+	width: 100%;
+}
+
+.textarea>label {
+	margin-bottom: 0.5em;
+}
+
+.image-upload>button {
+	flex: 1;
+}
+
+.image-upload-button {
+	padding: 0.5em;
+}
