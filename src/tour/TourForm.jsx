@@ -2,7 +2,7 @@ import { Button } from 'bootstrap'
 import React, { Component } from 'react'
 
 import FormInput from '../components/FormInput'
-import Button from '../components/Button'
+import CustomButton from '../components/CustomButton'
 
 class TourForm extends Component {
 
@@ -17,7 +17,7 @@ class TourForm extends Component {
 				<FormInput name="name" type="text" label="Nombre" placeholder="Inserta el nombre del tour" />
 				<FormInput name="description" type="textarea" label="Descripción" />
 				<FormInput name="image" type="image-upload" label="Imagen" alt="Imagen" onclick={this.uploadImage} />
-				<Button type="submit" text="Submit" />
+				<CustomButton type="submit" text="Submit" />
 			</form>
 		</div>
 	}
