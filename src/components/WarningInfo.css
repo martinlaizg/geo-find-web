@@ -1,0 +1,7 @@
+.warning-message {
+	background-color: #ffb834;
+	margin: 2em;
+	border: 1px #ffad15 solid;
+	border-radius: 0.4em;
+	padding: 1em;
+}

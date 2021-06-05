@@ -1,18 +1,19 @@
-import React from 'react'
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route
 } from 'react-router-dom'
 
-import './App.css'
-
 import Home from './views/Home'
 import Profile from './views/Profile'
-import Tours from './views/Tours'
+import ToursView from './views/ToursView'
+import TourView from './views/TourView'
+import TourForm from './views/TourForm'
 import Users from './views/Users'
 import Navbar from './navbar/Navbar'
 import Search from './views/Search'
+
+import './App.css'
 
 function App() {
 	return (
@@ -20,8 +21,14 @@ function App() {
 			<div className="container">
 				<Navbar />
 				<Switch>
-					<Route path="/tours">
-						<Tours />
+					<Route path="/tours" exact>
+						<ToursView />
+					</Route>
+					<Route path="/tours/create" exact>
+						<TourForm />
+					</Route>
+					<Route path="/tours/:id">
+						<TourView />
 					</Route>
 					<Route path="/users">
 						<Users />
