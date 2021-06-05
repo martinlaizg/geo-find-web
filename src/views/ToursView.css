@@ -1,0 +1,33 @@
+div.container>div {
+	margin: 0em 2em;
+}
+
+.column-container {
+	display: flex;
+}
+
+.main-column {
+	flex: 60%;
+	margin-bottom: 3em;
+}
+
+.side-column {
+	flex: 40%;
+}
+
+@media screen and (max-width: 900px) {
+	.column-container {
+		flex-direction: column;
+	}
+	.main-column {
+		flex: 100%;
+	}
+	.side-column {
+		flex: 100%;
+	}
+}
+
+.bar {
+	display: flex;
+	justify-content: space-between;
+}

@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
 import './Button.css'
 
-function Button(props) {
-	return <button>
+function Button({ text, type, onClick }) {
 
-	</button>
+	const click = (e) => {
+		if (type !== 'submit') {
+			onClick()
+		}
+	}
 
+	return <button type={type} onClick={click} className="button">{text}</button>
 }
 
 export default Button
