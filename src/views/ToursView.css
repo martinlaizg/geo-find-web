@@ -1,7 +1,3 @@
-div.container>div {
-	margin: 0em 2em;
-}
-
 .column-container {
 	display: flex;
 }

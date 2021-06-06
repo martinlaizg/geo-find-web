@@ -1,11 +1,7 @@
-import React, { Component } from 'react'
-
-export default class Search extends Component {
-	render() {
-		return (
-			<div>
-				<h1>Search</h1>
-			</div>
-		)
-	}
+const Search = () => {
+	return <div>
+		<h1>Search</h1>
+	</div>
 }
+
+export default Search

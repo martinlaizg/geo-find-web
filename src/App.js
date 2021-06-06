@@ -20,29 +20,31 @@ function App() {
 		<Router>
 			<div className="container">
 				<Navbar />
-				<Switch>
-					<Route path="/tours" exact>
-						<ToursView />
-					</Route>
-					<Route path="/tours/create" exact>
-						<TourForm />
-					</Route>
-					<Route path="/tours/:id">
-						<TourView />
-					</Route>
-					<Route path="/users">
-						<Users />
-					</Route>
-					<Route path="/profile">
-						<Profile />
-					</Route>
-					<Route path="/search">
-						<Search />
-					</Route>
-					<Route path="/">
-						<Home />
-					</Route>
-				</Switch>
+				<div className="content">
+					<Switch>
+						<Route path="/tours" exact>
+							<ToursView />
+						</Route>
+						<Route path="/tours/create" exact>
+							<TourForm />
+						</Route>
+						<Route path="/tours/:tourId">
+							<TourView />
+						</Route>
+						<Route path="/users">
+							<Users />
+						</Route>
+						<Route path="/profile">
+							<Profile />
+						</Route>
+						<Route path="/search">
+							<Search />
+						</Route>
+						<Route path="/">
+							<Home />
+						</Route>
+					</Switch>
+				</div>
 			</div>
 		</Router>
 	)

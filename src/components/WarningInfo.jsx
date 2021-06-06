@@ -1,14 +1,11 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import './WarningInfo.css'
 
-function WarningInfo(props) {
-	return (
-		<div className="warning-message">
-			{props.message}
-		</div>
-	)
+const WarningInfo = (props) => {
+	return <div className="warning-message">
+		{props.message}
+	</div>
 }
 
 WarningInfo.propTypes = {
