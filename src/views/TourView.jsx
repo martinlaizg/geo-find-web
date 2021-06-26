@@ -1,24 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
+
+import { getTour } from '../selector/tour'
+import { addTour } from '../action/tour'
+
+import useApi from '../hooks/useApi'
+
 import './TourView.css'
 
 const TourView = () => {
 
 	const { tourId } = useParams()
+	const tour = useSelector(getTour(tourId))
+	const dispatch = useDispatch()
 
-	const [tour, setTour] = useState(null)
+	const { data } = useApi(`/tour/${tourId}`, '', {}, false)
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_HOST}/tour/${tourId}`)
-			.then((response) => {
-				return response.json()
-			}).then((json) => {
-				setTour(json)
-			}).catch((error) => {
-				alert("Ha ocurrido un error")
-				console.log(error)
-			})
-	}, [tourId])
+		if (data) {
+			dispatch(addTour(data))
+		}
+		// eslint-disable-next-line
+	}, [data])
 
 	if (!tour) {
 		return <></>

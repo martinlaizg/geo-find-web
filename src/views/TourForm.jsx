@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 
 import WarningInfo from '../components/WarningInfo'
@@ -11,26 +11,39 @@ const TourForm = ({ onSubmit }) => {
 
 	const history = useHistory()
 
-	const uploadImage = () => {
-		alert('Selecciona la imagen')
-	}
+	useEffect(() => {
+		console.log("Data ", data)
+	}, [data])
 
 	const onChange = (key) => {
 		return ({ target }) => {
+			let value = target.value.trim()
+			console.log("change=", key, ", value=", value)
+			console.log("current error=", error)
+			if (error?.type === key && value) {
+				setError(null)
+			}
 			setData({
 				...data,
-				[key]: target.value.trim()
+				[key]: value
 			})
 		}
 	}
 
 	const createTour = (e) => {
 		e.preventDefault()
+		console.log("Create Tour")
+		if (error) {
+			setError(null)
+			return
+		}
 		if (!data.name) {
-			setError("El nombre es necesario")
+			setError({ message: "El nombre es necesario", type: "name" })
+			return
 		}
 		if (!data.description) {
-			setError("La descripción es necesaria")
+			setError({ message: "La descripción es necesaria", type: "description" })
+			return
 		}
 		fetch(`${process.env.REACT_APP_API_HOST}/tour`, {
 			method: 'POST',
@@ -40,7 +53,7 @@ const TourForm = ({ onSubmit }) => {
 			body: JSON.stringify(data)
 		}).then((response) => {
 			if (response.status !== 200) {
-				setError("Ha ocurrido un error")
+				setError({ message: "Ha ocurrido un error", type: "request" })
 			} else {
 				return response.json()
 			}
@@ -48,11 +61,11 @@ const TourForm = ({ onSubmit }) => {
 			history.push(`/tours/${json._id}`)
 		}).catch((err) => {
 			console.log(err)
-			setError("Ha ocurrido un error con la conexión al servidor")
+			setError({ message: "Ha ocurrido un error con la conexión al servidor", type: "connection" })
 		})
 	}
 
-	const errorMessage = error && <WarningInfo message={error} />
+	const errorMessage = error && <WarningInfo message={error.message} />
 
 	const style = {
 		width: '80%',
@@ -64,7 +77,7 @@ const TourForm = ({ onSubmit }) => {
 		<form onSubmit={createTour}>
 			<FormInput name='name' onChange={onChange('name')} type='text' label='Nombre' placeholder='Inserta el nombre del tour' />
 			<FormInput name='description' onChange={onChange('description')} type='textarea' label='Descripción' />
-			<FormInput name='image' onChange={onChange('image')} type='image-upload' label='Imagen' alt='Imagen' onclick={uploadImage} />
+			{/* <FormInput name='image' onChange={onChange('image')} type='image-upload' label='Imagen' alt='Imagen' /> */}
 			{errorMessage}
 			<Button type='submit' text='Submit' />
 		</form>

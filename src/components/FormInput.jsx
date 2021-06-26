@@ -1,6 +1,6 @@
 import './FormInput.css'
 
-const FormInput = ({ name, onChange, onclick, type, placeholder, label }) => {
+const FormInput = ({ name, onChange, type, placeholder, label }) => {
 	var classList = ['form-input']
 	var input
 	if (type === 'textarea') {
@@ -8,7 +8,7 @@ const FormInput = ({ name, onChange, onclick, type, placeholder, label }) => {
 		input = <textarea onChange={onChange} name={name} id={name}></textarea>
 	} else if (type === 'image-upload') {
 		classList.push('image-upload')
-		input = <button type='button' className='image-upload-button' onClick={onclick}>Subir imagen</button>
+		input = <input onChange={onChange} type='file' className='image-upload-button' />
 	} else {
 		input = <input onChange={onChange} type={type} name={name} id={name} placeholder={placeholder} />
 	}
