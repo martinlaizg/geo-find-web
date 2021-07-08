@@ -15,8 +15,8 @@ const TourView = () => {
 	const tour = useSelector(getTour(tourId))
 	const dispatch = useDispatch()
 
-	const { data } = useApi(`/tour/${tourId}`, '', {}, false)
-
+	const { data } = useApi(`/tour/${tourId}`, {}, false)
+	console.debug(`Tour id=${tour?._id}`)
 	useEffect(() => {
 		if (data) {
 			dispatch(addTour(data))

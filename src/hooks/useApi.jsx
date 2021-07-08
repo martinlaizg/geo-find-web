@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 
 
-const useApi = (url, token = '', params = {}, delayed = false) => {
+const useApi = (url, params = {}, delayed = false) => {
 	const [loading, setLoading] = useState(!delayed)
 	const [execute, setExecute] = useState(!delayed)
 	const [error, setError] = useState(null)
@@ -9,33 +9,36 @@ const useApi = (url, token = '', params = {}, delayed = false) => {
 	const [data, setData] = useState(null)
 
 	const config = useMemo(() => {
-		let fetchParameters = {
+		let auxConfig = {
+			method: 'GET',
 			...fetchParams
 		}
-
-		if (!fetchParameters.headers) {
-			fetchParameters['headers'] = {}
+		if (!auxConfig.headers) {
+			auxConfig['headers'] = {}
 		}
-		fetchParameters['api-token'] = token
-
-		return fetchParameters
-	}, [token, fetchParams])
+		console.debug('auxConfig', auxConfig)
+		return auxConfig
+	}, [fetchParams])
 
 	useEffect(() => {
 		if (execute) {
 			setLoading(true)
-
+			console.debug(`fetch url=${url} method=${config.method}`)
+			console.debug(`fetch body=${config.body}`)
 			fetch(process.env.REACT_APP_API_HOST + url, config)
 				.then((response) => response.json())
 				.then((json) => setData(json))
 				.catch((err) => setError(err))
 				.finally(() => setLoading(false))
-
 		}
+		// eslint-disable-next-line
 	}, [url, config, execute])
 
 	const setParams = (newParams) => {
-		setFetchParams(newParams)
+		setFetchParams({
+			...fetchParams,
+			...newParams
+		})
 	}
 	const run = () => {
 		setExecute(true)
