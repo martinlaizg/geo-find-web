@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { getTours } from '../selector/tour'
@@ -9,21 +11,19 @@ import Button from '../components/Button'
 import Row from '../components/Row'
 
 import './ToursView.css'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 const ToursView = () => {
 	const tours = useSelector(getTours)
 	const history = useHistory()
 	const dispatch = useDispatch()
 
-	const { data: apiData } = useApi('/tour', '', {}, false)
+	const request = useApi('/tour')
 
 	useEffect(() => {
-		if (dispatch && apiData) {
-			dispatch(setTours(apiData))
+		if (dispatch && request.data) {
+			dispatch(setTours(request.data))
 		}
-	}, [dispatch, apiData])
+	}, [dispatch, request.data])
 
 	const goToCreateTour = () => history.push("/tours/create")
 

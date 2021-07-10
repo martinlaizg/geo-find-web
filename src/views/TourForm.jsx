@@ -1,25 +1,43 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
+import { useDispatch } from 'react-redux'
 
 import WarningInfo from '../components/WarningInfo'
 import FormInput from '../components/FormInput'
 import Button from '../components/Button'
 
+import useApi from '../hooks/useApi'
+import { addTour } from '../action/tour'
+
 const TourForm = ({ onSubmit }) => {
 	var [data, setData] = useState({ name: "", description: "", image: "" })
 	var [error, setError] = useState(null)
 
+	const dispatch = useDispatch()
 	const history = useHistory()
 
+	var request = useApi('/tour', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' }
+	}, true)
+
 	useEffect(() => {
-		console.log("Data ", data)
-	}, [data])
+		if (request.data) {
+			dispatch(addTour(request.data))
+			history.push(`/tours/${request.data._id}`)
+		}
+		// eslint-disable-next-line
+	}, [request.data])
+
+	useEffect(() => {
+		if (request.error) {
+			setError(request.error)
+		}
+	}, [request.error])
 
 	const onChange = (key) => {
 		return ({ target }) => {
 			let value = target.value.trim()
-			console.log("change=", key, ", value=", value)
-			console.log("current error=", error)
 			if (error?.type === key && value) {
 				setError(null)
 			}
@@ -32,7 +50,6 @@ const TourForm = ({ onSubmit }) => {
 
 	const createTour = (e) => {
 		e.preventDefault()
-		console.log("Create Tour")
 		if (error) {
 			setError(null)
 			return
@@ -45,24 +62,9 @@ const TourForm = ({ onSubmit }) => {
 			setError({ message: "La descripción es necesaria", type: "description" })
 			return
 		}
-		fetch(`${process.env.REACT_APP_API_HOST}/tour`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		}).then((response) => {
-			if (response.status !== 200) {
-				setError({ message: "Ha ocurrido un error", type: "request" })
-			} else {
-				return response.json()
-			}
-		}).then((json) => {
-			history.push(`/tours/${json._id}`)
-		}).catch((err) => {
-			console.log(err)
-			setError({ message: "Ha ocurrido un error con la conexión al servidor", type: "connection" })
-		})
+
+		request.setParams({ body: JSON.stringify(data) })
+		request.run()
 	}
 
 	const errorMessage = error && <WarningInfo message={error.message} />
