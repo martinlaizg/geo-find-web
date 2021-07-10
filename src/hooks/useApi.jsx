@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 
 
-const useApi = (url, params = {}, delayed = false) => {
+const useApi = (url, initialParams = {}, delayed = false) => {
 	const [loading, setLoading] = useState(!delayed)
 	const [execute, setExecute] = useState(!delayed)
 	const [error, setError] = useState(null)

@@ -1,7 +1,7 @@
 
 const actionTypes = {
-	SET_TODOS: 'SET_TODOS',
-	ADD_TODO: 'ADD_TODO'
+	SET_TOURS: 'SET_TOURS',
+	ADD_TOUR: 'ADD_TOUR'
 }
 
 export default actionTypes

@@ -6,8 +6,7 @@ const initialState = {
 
 const addAndReplace = (list, item, idFunc) => {
 	let index = list.findIndex((v) => idFunc(v) === idFunc(item))
-	console.log('index', index)
-	if (index == null) {
+	if (index == -1) {
 		return [...list, item]
 	}
 	return [
@@ -19,12 +18,12 @@ const addAndReplace = (list, item, idFunc) => {
 
 const tour = (state = initialState, action) => {
 	switch (action.type) {
-		case actionTypes.SET_TODOS:
+		case actionTypes.SET_TOURS:
 			return {
 				...state,
 				list: action.tours
 			}
-		case actionTypes.ADD_TODO:
+		case actionTypes.ADD_TOUR:
 			return {
 				...state,
 				list: addAndReplace(state.list, action.tour, (t) => t._id)
