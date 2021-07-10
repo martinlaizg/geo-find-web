@@ -1,15 +1,16 @@
 import { useEffect, useMemo, useState } from "react"
 
 
-const useApi = (url, token = '', params = {}, delayed = false) => {
+const useApi = (url, token = '', initialParams = {}, delayed = false) => {
 	const [loading, setLoading] = useState(!delayed)
 	const [execute, setExecute] = useState(!delayed)
 	const [error, setError] = useState(null)
-	const [fetchParams, setFetchParams] = useState(params)
+	const [fetchParams, setFetchParams] = useState(initialParams)
 	const [data, setData] = useState(null)
 
 	const config = useMemo(() => {
 		let fetchParameters = {
+			...initialParams,
 			...fetchParams
 		}
 
@@ -25,7 +26,7 @@ const useApi = (url, token = '', params = {}, delayed = false) => {
 		if (execute) {
 			setLoading(true)
 
-			fetch(process.env.REACT_APP_API_HOST + url, config)
+			fetch(SERVER_URL + url, config)
 				.then((response) => response.json())
 				.then((json) => setData(json))
 				.catch((err) => setError(err))

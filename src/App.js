@@ -3,8 +3,8 @@ import {
 	Switch,
 	Route
 } from 'react-router-dom'
-
 import { Provider } from 'react-redux'
+
 import store from './store'
 
 import Home from './views/Home'
@@ -19,7 +19,7 @@ import Search from './views/Search'
 
 import './App.css'
 
-function App() {
+const App = () => {
 	return (
 		<Provider store={store}>
 			<Router>
